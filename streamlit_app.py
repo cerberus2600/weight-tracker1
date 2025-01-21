@@ -65,7 +65,7 @@ def calculate_target_weight(height):
 setup_database()
 
 # Streamlit UI
-st.title('Weight Tracker for K&V')
+st.title('Weight Tracker for Karthi & Vinoth')
 
 # User selection
 person = st.selectbox('Select Person', ['Karthi', 'Vinoth'])
