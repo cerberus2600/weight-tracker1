@@ -65,10 +65,10 @@ def calculate_target_weight(height):
 setup_database()
 
 # Streamlit UI
-st.title('Weight Tracker for Two Persons')
+st.title('Weight Tracker for K&V')
 
 # User selection
-person = st.selectbox('Select Person', ['Person 1', 'Person 2'])
+person = st.selectbox('Select Person', ['Karthi', 'Vinoth'])
 
 # Check if height is already recorded
 user_height = get_user_height(person)
