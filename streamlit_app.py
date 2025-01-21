@@ -1,5 +1,7 @@
 import sqlite3
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Database setup
 def setup_database():
@@ -63,10 +65,10 @@ def calculate_target_weight(height):
 setup_database()
 
 # Streamlit UI
-st.title('Weight Tracker for Karthi & Vinoth')
+st.title('Weight Tracker for Two Persons')
 
 # User selection
-person = st.selectbox('Select Person', ['Karthi', 'Vinoth'])
+person = st.selectbox('Select Person', ['Person 1', 'Person 2'])
 
 # Check if height is already recorded
 user_height = get_user_height(person)
@@ -95,6 +97,22 @@ else:
     weights = get_weights(person)
     if weights:
         st.subheader(f'Weight Records for {person}')
-        st.write(weights)
+        df = pd.DataFrame(weights, columns=['Date', 'Current Weight', 'Target Weight'])
+        st.write(df)
+
+        # Plot weight data
+        st.subheader('Weight Progress')
+        df['Date'] = pd.to_datetime(df['Date'])
+        df = df.sort_values('Date')
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(df['Date'], df['Current Weight'], marker='o', label='Current Weight')
+        plt.axhline(y=df['Target Weight'].iloc[0], color='r', linestyle='--', label='Target Weight')
+        plt.xlabel('Date')
+        plt.ylabel('Weight (kg)')
+        plt.title(f'Weight Progress for {person}')
+        plt.legend()
+        plt.grid(True)
+        st.pyplot(plt)
     else:
         st.write(f'No records found for {person}.')
