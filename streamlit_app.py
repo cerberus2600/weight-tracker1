@@ -2,6 +2,7 @@ import sqlite3
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+!pip install matplotlib
 
 # Database setup
 def setup_database():
